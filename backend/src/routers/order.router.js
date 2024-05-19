@@ -95,6 +95,34 @@ router.get(
     })
 );
 
+router.put(
+    '/:orderId/status',
+    handler(async (req, res) => {
+        const { orderId } = req.params;
+        const { status } = req.body;
+
+        const validStatuses = Object.values(OrderStatus);
+        if (!validStatuses.includes(status)) {
+            return res.status(BAD_REQUEST).send('Invalid status');
+        }
+
+        const order = await OrderModel.findById(orderId);
+        if (!order) {
+            return res.status(BAD_REQUEST).send('Order Not Found');
+        }
+
+        const user = await UserModel.findById(req.user.id);
+        if (!user.isAdmin && order.user.toString() !== req.user.id) {
+            return res.status(UNAUTHORIZED).send('You are not authorized to update this order');
+        }
+
+        order.status = status;
+        await order.save();
+
+        res.send(order);
+    })
+);
+
 const getNewOrderForCurrentUser = async req =>
     await OrderModel.findOne({user: req.user.id, status: OrderStatus.NEW});
 

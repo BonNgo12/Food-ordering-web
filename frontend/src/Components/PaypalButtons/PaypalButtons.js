@@ -36,7 +36,7 @@ function Buttons({ order }) {
         purchase_units: [
           {
             amount: {
-              currency_code: 'USD',
+              currency_code: 'VND',
               value: order.totalPrice,
             },
           },

@@ -12,7 +12,7 @@
 }
 
 .image {
-  border-radius: 3rem;
+  border-radius: 1rem;
   flex: 1 0;
   object-fit: cover;
   height: 35rem;
@@ -86,7 +86,7 @@
 
 .container button {
   color: white;
-  background-color: #e72929;
+  background-color: darkred;
   border: none;
   font-size: 1.2rem;
   padding: 1rem;

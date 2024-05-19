@@ -2,27 +2,37 @@ import React from 'react';
 import classes from './header.module.css';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
-import { useAuth} from '../../hooks/useAuth';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faShoppingCart } from '@fortawesome/svgs/solid/cart-shopping';
+import { useAuth } from '../../hooks/useAuth';
+import Search from '../Search/Search';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { useClearCart } from '../../hooks/useClearCart';
 
 export default function Header() {
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
 
     const {cart} = useCart();
+
+    const { logout } = useClearCart();
 
     return (
     <header className={classes.header}>
         <div className={classes.container}>
             <Link to="/" className={classes.logo}>
-                Food !
+                NGO
             </Link>
+            <div className={classes.search}>
+                <Search />
+            </div>
             <nav>
                 <ul>
                     {
                         user? (
                         <li className={classes.menu_container}>
-                            <Link to="/dashboard">{user.name}</Link>
+                            <Link to="/dashboard">
+                                <FontAwesomeIcon icon={faUser} />
+                            </Link>
                             <div className={classes.menu}>
                                 <Link to="/profile">Profile</Link>
                                 <Link to="/orders">Orders</Link>
@@ -34,11 +44,12 @@ export default function Header() {
 
                     <li>
                         <Link to="/cart">
-                            {/* <div className='logo'>
+                            {user !== null ? 
+                            <>  
                                 <FontAwesomeIcon icon={faShoppingCart} />
-                            </div> */}
-                            Cart
-                            {cart.totalCount > 0 && <span className={classes.cart_count}>{cart.totalCount}</span>}
+                                {cart.totalCount > 0 && <span className={classes.cart_count}>{cart.totalCount}</span>}
+                            </> : <><FontAwesomeIcon icon={faShoppingCart} /></>}
+                            
                         </Link>
                     </li>
                 </ul>

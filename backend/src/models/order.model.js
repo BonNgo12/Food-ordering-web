@@ -22,7 +22,6 @@ export const OrderItemSchema = new Schema(
     _id: false,
   }
 );
-
 OrderItemSchema.pre('validate', function (next) {
   this.price = this.food.price * this.quantity;
   next();
@@ -38,6 +37,7 @@ const orderSchema = new Schema(
     items: { type: [OrderItemSchema], required: true },
     status: { type: String, default: OrderStatus.NEW },
     user: { type: Schema.Types.ObjectId, required: true, ref: 'user' },
+    paymentMethod: {type: String, required: true },
   },
   {
     timestamps: true,
@@ -49,5 +49,4 @@ const orderSchema = new Schema(
     },
   }
 );
-
 export const OrderModel = model('order', orderSchema);

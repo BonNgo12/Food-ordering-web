@@ -1,6 +1,5 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 
-
 const CartContext = createContext(null);
 const CART_KEY = 'cart';
 const EMPTY_CART = {
@@ -58,7 +57,7 @@ export default function CartProvider({children}) {
             cartItems.map(item => (item.food.id === food.id ? changedCartItem : item))
           );
     };
-
+    
     const addToCart = food => {
         const cartItem = cartItems.find(item => item.food.id === food.id);
         if (cartItem) {
@@ -78,7 +77,7 @@ export default function CartProvider({children}) {
 
     return <CartContext.Provider 
         value={{
-            cart:{items:cartItems, totalPrice,totalCount},
+            cart:{items:cartItems, totalPrice, totalCount},
             removeFromCart,
             changeQuantity,
             addToCart,

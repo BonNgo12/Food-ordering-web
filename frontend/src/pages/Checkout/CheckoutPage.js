@@ -17,38 +17,52 @@ export default function CheckoutPage() {
   const { cart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [order, setOrder] = useState({...cart});
+  const [order, setOrder] = useState({ ...cart });
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const { clearCart } = useCart();
+
+
   const {
     register,
-    formState: {errors},
+    formState: { errors },
     handleSubmit,
   } = useForm();
 
   const submit = async data => {
-    if(!order.addressLatLng){
+    if (!order.addressLatLng) {
       toast.warning('Please select your location on the map');
-      return ;
+      return;
     }
-
-    await createOrder({...order, name: data.name, address: data.address});
-    navigate('/payment');
+    
+    if (paymentMethod === 'cash') {
+      await createOrder({ ...order, name: data.name, address: data.address, paymentMethod: 'CASH' });
+      toast.success('Place Order Successfully', 'Success');
+      clearCart();
+      navigate('/');
+    }
+    else if (paymentMethod === 'paypal') {
+      await createOrder({ ...order, name: data.name, address: data.address, paymentMethod: 'PAYPAL' });
+      navigate('/payment');
+    } else {
+      toast.warning('Please select a payment method');
+    }
+    // await createOrder({ ...order, name: data.name, address: data.address });
+    // navigate('/payment');
   };
 
   return (
     <>
-      <form 
-        onSubmit={handleSubmit(submit)}
-        className={classes.containet}
-      >
+      <form onSubmit={handleSubmit(submit)} className={classes.container}>
         <div className={classes.content}>
-          <Title title="Order form" fontSize="1.6rem" />
+          <Title title="Order Form" fontSize="1.6rem" />
           <div className={classes.inputs}>
             <Input
               defaultValue={user.name}
               label="Name"
               {...register('name')}
-              error = {errors.name} />
-            <Input 
+              error={errors.name}
+            />
+            <Input
               defaultValue={user.address}
               label="Address"
               {...register('address')}
@@ -57,8 +71,9 @@ export default function CheckoutPage() {
           </div>
           <OrderItemsList order={order} />
         </div>
+
         <div>
-          <Title title="Choose Your Location" fontSize="1.6rem" />
+          <Title title="Your Location" fontSize="1.6rem" />
           <Map
             location={order.addressLatLng}
             onChange={latlng => {
@@ -66,6 +81,32 @@ export default function CheckoutPage() {
               setOrder({ ...order, addressLatLng: latlng });
             }}
           />
+        </div>
+
+        
+        <div className={classes.payment_method}>
+          <Title title="Payment Method" fontSize="1.6rem" />
+          <div className={classes.type_of_pay}>
+            <label>
+              <input
+                type="checkbox"
+                value="Cash"
+                checked={paymentMethod === 'cash'}
+                onChange={e => setPaymentMethod(e.target.checked ? 'cash' : '')}
+              />
+              Cash (COD) 
+            </label>
+
+            <label>
+              <input
+                  type="checkbox"
+                  value="paypal"
+                  checked={paymentMethod === 'paypal'}
+                  onChange={e => setPaymentMethod(e.target.checked ? 'paypal' : '')}
+                />
+                Paypal Credit Card
+            </label>
+          </div>
         </div>
 
         <div className={classes.buttons_container}>
@@ -80,5 +121,5 @@ export default function CheckoutPage() {
         </div>
       </form>
     </>
-  )
+  );
 }

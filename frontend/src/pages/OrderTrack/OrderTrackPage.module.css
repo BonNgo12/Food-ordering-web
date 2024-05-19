@@ -1,33 +1,42 @@
 .container {
-    position: relative;
-    width: 35rem;
-    height: 22rem;
-    text-align: center;
-  }
-  
-  .map {
-    width: 100% !important;
-    height: 100% !important;
-  }
-  
-  .find_location {
-    position: absolute;
-    margin: auto;
-    width: 12rem;
-    min-height: 2.5rem;
-    font-size: 1rem;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background-color: white;
-    cursor: pointer;
-    border-radius: 0 0 1rem 1rem;
-    border: none;
-    border-top: 1px solid lightgrey;
-  }
-  
-  .find_location:hover {
-    background-color: whitesmoke;
-  }
-  
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 35rem;
+  margin-right: 1rem;
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
+.header > div {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.header strong {
+  display: inline-block;
+  width: 20%;
+}
+
+.payment {
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.payment a {
+  background-color: darkred;
+  color: white;
+  padding: 0.8rem 5rem;
+  border-radius: 1rem;
+}

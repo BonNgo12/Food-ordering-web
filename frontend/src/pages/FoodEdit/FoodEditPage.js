@@ -16,8 +16,6 @@ export default function FoodEditPage() {
     const isEditMode = !!foodId;
 
   const navigate = useNavigate();
-
-
     const {
         handleSubmit,
         register,
@@ -41,12 +39,13 @@ export default function FoodEditPage() {
         if (isEditMode) {
           await update(food);
           toast.success(`Food "${food.name}" updated successfully!`);
+          navigate('/admin/foods/');
           return;
         }
     
         const newFood = await add(food);
         toast.success(`Food "${food.name}" added successfully!`);
-        navigate('/admin/editFood/' + newFood.id, { replace: true });
+        navigate('/admin/foods/');
     };
 
     const upload = async event => {
@@ -116,8 +115,7 @@ export default function FoodEditPage() {
                         {...register('cookTime', { required: true })}
                         error={errors.cookTime}
                     />
-
-                    <Button type="submit" text={isEditMode ? 'Update' : 'Create'} />
+                    <Button type="submit" backgroundColor='darkred' text={isEditMode ? 'Update' : 'Create'} />
                 </form>
             </div>
         </div>

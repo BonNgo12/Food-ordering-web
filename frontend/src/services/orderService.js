@@ -33,4 +33,13 @@ export const getAllStatus = async () => {
     const { data } = await axios.get(`/api/orders/allstatus`);
     return data;
 };
-  
+
+export const updateOrderStatus = async (orderId, newStatus) => {
+    try {
+        const { data } = await axios.put(`/api/orders/${orderId}/status`, { status: newStatus });
+        return data;
+    } catch (error) {
+        console.error('Failed to update order status', error);
+        throw error;
+    }
+};

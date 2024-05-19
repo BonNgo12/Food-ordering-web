@@ -28,11 +28,10 @@ export const AuthProvider = ({ children }) => {
         }
     };
     
-
     const logout = () => {
         userService.logout();
         setUser(null);
-        toast.success('Logout successfully');
+        toast.success('Logout successfully');        
     };
 
     const updateProfile = async user => {

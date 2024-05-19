@@ -7,22 +7,21 @@
     top: 0;
     left: 0;
   }
-  
-  .items {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80%;
-    width: 100%;
-  }
-  
-  .container img {
-    border-bottom: 10px solid brown;
-  }
-  
-  .container h1 {
-    color: brown;
-    text-transform: lowercase;
-  }
-  
+
+.items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  width: 100%;
+}
+
+.container img {
+  border-bottom: 10px solid darkred;
+}
+
+.container h1 {
+  color: darkred;
+  text-transform: lowercase;
+}

@@ -1,10 +1,5 @@
-// import { verify } from 'jsonwebtoken';
 import { UNAUTHORIZED } from '../constants/httpStatus.js';
-
-// Import jsonwebtoken module using ES module syntax
 import jwt from 'jsonwebtoken';
-
-// Now you can directly access the verify function
 const { verify } = jwt;
 
 

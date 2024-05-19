@@ -7,7 +7,6 @@ import Title from '../../Components/Title/Title';
 import Search from '../../Components/Search/Search';
 import Price from '../../Components/Price/Price';
 import { toast } from 'react-toastify';
-
 export default function FoodsAdminPage() {
   const [foods, setFoods] = useState();
   const { searchTerm } = useParams();

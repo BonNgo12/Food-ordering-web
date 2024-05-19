@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import classes from './Search.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 Search.defaultProps = {
   searchRoute: '/search/',
   defaultRoute: '/',
-  placeholder: 'Search Food Mine!',
+  placeholder: 'Search',
 };
 
 export default function Search({
@@ -34,7 +36,9 @@ export default function Search({
         onKeyUp={e => e.key === 'Enter' && search()}
         value={term}
       />
-      <button onClick={search}>Search</button>
+      <button onClick={search}>
+        <FontAwesomeIcon icon={faSearch} />
+      </button>
     </div>
   );
 }

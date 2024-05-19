@@ -53,14 +53,14 @@ function Input({ label, type, defaultValue, onChange, onBlur, name, error}, ref)
           defaultValue={defaultValue}
           className={classes.input}
           ref={ref}
-          name={name}
+          name={name} 
           onChange={onChange}
           onBlur={onBlur}
         >
           <option value="">Select Tags</option>
-          <option value="Appertizer_Salad">Appertizer & Salad</option>
+          <option value="Appertizer & Salad">Appertizer & Salad</option>
           <option value="Pizza">Pizza</option>
-          <option value="Pasta_MainDishes">Pasta & Main Dishes</option>
+          <option value="Pasta & Main Dishes">Pasta & Main Dishes</option>
           <option value="Dessert">Dessert</option>
           <option value="Drink">Drink</option>
         </select>

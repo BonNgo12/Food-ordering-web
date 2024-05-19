@@ -26,12 +26,9 @@ router.post(
       stars,
       favorite,
       imageUrl,
-      // origins: origins.split ? origins.split(',') : origins,
       cookTime,
     });
-
     await food.save();
-
     res.send(food);
   })
 );
@@ -52,7 +49,6 @@ router.put(
         stars,
         favorite,
         imageUrl,
-        // origins: origins.split ? origins.split(',') : origins,
         cookTime,
       }
     );

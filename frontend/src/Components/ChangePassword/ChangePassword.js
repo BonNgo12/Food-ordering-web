@@ -54,7 +54,7 @@ export default function ChangePassword() {
           error={errors.confirmNewPassword}
         />
 
-        <Button type="submit" text="Change" />
+        <Button type="submit" backgroundColor='darkred' text="Change"/>
       </form>
     </div>
   );

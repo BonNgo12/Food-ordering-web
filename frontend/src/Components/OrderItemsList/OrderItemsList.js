@@ -21,7 +21,7 @@ export default function OrderItemsList({ order }) {
             </td>
             <td>{item.food.name}</td>
             <td>
-              <Price price={item.food.price} />
+              <Price price={item.food.price}  />
             </td>
             <td>{item.quantity}</td>
             <td>
@@ -33,9 +33,9 @@ export default function OrderItemsList({ order }) {
         <tr>
           <td colSpan="3"></td>
           <td>
-            <strong>Total :</strong>
+            <strong>Total:</strong>
           </td>
-          <td>
+          <td className={classes.total_Price}>
             <Price price={order.totalPrice} />
           </td>
         </tr>

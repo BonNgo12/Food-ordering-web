@@ -18,7 +18,6 @@ router.post(
       res.status(BAD_REQUEST).send();
       return;
     }
-
     const imageUrl = await uploadImageToCloudinary(req.file?.buffer);
     res.send({ imageUrl });
   })

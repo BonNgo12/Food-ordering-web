@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { getById, register, updateUser } from '../../services/userService';
+import { getById, updateUser } from '../../services/userService';
 import { useParams } from 'react-router-dom';
 import classes from './UserEditPage.module.css'
 import Title from '../../Components/Title/Title';
 import Input from '../../Components/Input/Input';
 import { EMAIL } from '../../constants/patterns';
 import Button from '../../Components/Button/Button';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserEditPage() {
   const {
@@ -18,6 +20,7 @@ export default function UserEditPage() {
 
   const { userId } = useParams();
   const isEditMode = userId;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isEditMode) loadUser();
@@ -30,6 +33,8 @@ export default function UserEditPage() {
 
   const submit = userData => {
     updateUser(userData);
+    toast.success(`User "${userData.name}" updated successfully!`);
+    navigate('/admin/users/');
   };
 
   return (
@@ -54,7 +59,7 @@ export default function UserEditPage() {
           />
 
           <Input label="Is Admin" type="checkbox" {...register('isAdmin')} />
-          <Button type="submit" />
+          <Button type="submit" backgroundColor='darkred' />
         </form>
       </div>
     </div>

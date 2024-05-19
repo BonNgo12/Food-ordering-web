@@ -38,3 +38,4 @@ export async function add(food) {
     const { data } = await axios.post('/api/foods', food);
     return data;
 }
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getAll, getAllStatus } from '../../services/orderService';
 import classes from './OrdersPage.module.css';
@@ -6,6 +6,10 @@ import Title from '../../Components/Title/Title';
 import DateTime from '../../Components/DateTime/DateTime';
 import Price from '../../Components/Price/Price';
 import NotFound from '../../Components/NotFound/NotFound';
+import Search from '../../Components/Search/Search';
+import { updateOrderStatus } from '../../services/orderService';
+import { useAuth } from '../../hooks/useAuth';
+
 
 const initialState = {};
 const reducer = (state, action) => {
@@ -15,6 +19,13 @@ const reducer = (state, action) => {
       return { ...state, allStatus: payload };
     case 'ORDERS_FETCHED':
       return { ...state, orders: payload };
+    case 'ORDER_STATUS_UPDATED':
+      return {
+        ...state,
+        orders: state.orders.map(order =>
+          order.id === payload.orderId ? { ...order, status: payload.newStatus } : order
+        ),
+      };
     default:
       return state;
   }
@@ -22,8 +33,9 @@ const reducer = (state, action) => {
 
 export default function OrdersPage() {
   const [{ allStatus, orders }, dispatch] = useReducer(reducer, initialState);
-
   const { filter } = useParams();
+  // const [selectedStatus] = useState('');
+  const { user } = useAuth();
 
   useEffect(() => {
     getAllStatus().then(status => {
@@ -34,10 +46,24 @@ export default function OrdersPage() {
     });
   }, [filter]);
 
+  const handleStatusChange = async(orderId, newStatus) => {
+    try {
+      await updateOrderStatus(orderId, newStatus);
+      dispatch({ type: 'ORDER_STATUS_UPDATED', payload: { orderId, newStatus } });
+    } catch (error) {
+      console.error('Failed to update order status', error);
+    }
+  };
+
   return (
     <div className={classes.container}>
       <Title title="Orders" margin="1.5rem 0 0 .2rem" fontSize="1.9rem" />
-
+      <Search
+          searchRoute="/track/"
+          defaultRoute="/track/"
+          placeholder="Search Order"
+          margin="1rem 0"
+        />
       {allStatus && (
         <div className={classes.all_status}>
           <Link to="/orders" className={!filter ? classes.selected : ''}>
@@ -70,14 +96,29 @@ export default function OrdersPage() {
               <span>
                 <DateTime date={order.createdAt} />
               </span>
-              <span>{order.status}</span>
+              {user?.isAdmin && (
+                <div className={classes.statusContainer}>
+                  <select
+                    className={classes.statusOptions}
+                    value={order.status}
+                    onChange={e => handleStatusChange(order.id, e.target.value)}
+                  >
+                    <option value="SHIPPED" className={classes.shipped}>SHIPPED</option>
+                    <option value="CANCELED" className={classes.canceled}>CANCELED</option>
+                  </select>
+                </div>
+              )}
             </div>
+
             <div className={classes.items}>
               {order.items.map(item => (
                 <Link key={item.food.id} to={`/food/${item.food.id}`}>
                   <img src={item.food.imageUrl} alt={item.food.name} />
                 </Link>
               ))}
+
+
+
             </div>
             <div className={classes.footer}>
               <div>
