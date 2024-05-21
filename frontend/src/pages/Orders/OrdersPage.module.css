@@ -104,12 +104,8 @@ select{
   justify-content: center;
 }
 
-.shipped, .canceled{
+.option{
   color: darkred;
   background: white;
   font-weight: 700;
-}
-.shipped:hover, .canceled:hover{
-  background: darkred;
-  color: white;
 }

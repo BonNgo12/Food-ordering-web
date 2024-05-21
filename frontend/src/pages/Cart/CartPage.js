@@ -11,7 +11,7 @@ import { useAuth } from '../../hooks/useAuth';
 import LoginPage from '../Login/LoginPage';
 
 export default function CartPage() {
-  const { cart, removeFromCart, changeQuantity, clearCart } = useCart();
+  const { cart, removeFromCart, changeQuantity } = useCart();
   const { user } = useAuth();
 
   return (

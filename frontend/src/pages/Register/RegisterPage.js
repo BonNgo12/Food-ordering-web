@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { EMAIL } from '../../constants/patterns';
-// import { EMAIL } from '../../constants/patterns';
 
 export default function RegisterPage() {
     const auth = useAuth();

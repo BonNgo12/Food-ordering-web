@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { getById, updateUser } from '../../services/userService';
 import { useParams } from 'react-router-dom';
-import classes from './UserEditPage.module.css'
+import classes from './UsersEditPage.module.css'
 import Title from '../../Components/Title/Title';
 import Input from '../../Components/Input/Input';
 import { EMAIL } from '../../constants/patterns';

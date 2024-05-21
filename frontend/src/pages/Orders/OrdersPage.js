@@ -103,8 +103,12 @@ export default function OrdersPage() {
                     value={order.status}
                     onChange={e => handleStatusChange(order.id, e.target.value)}
                   >
-                    <option value="SHIPPED" className={classes.shipped}>SHIPPED</option>
-                    <option value="CANCELED" className={classes.canceled}>CANCELED</option>
+                    <option value={order.status} disabled>{order.status}</option>
+                    {allStatus.filter(status => status !== order.status).map(status => (
+                      <option className={classes.option} key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
                   </select>
                 </div>
               )}

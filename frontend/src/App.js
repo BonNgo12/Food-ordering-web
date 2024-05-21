@@ -3,7 +3,7 @@ import Header from "./Components/Header/Header";
 import Loading from "./Components/Loading/Loading";
 import { useLoading } from "./hooks/useLoading";
 import { setLoadingInterceptor } from "./interceptors/loadingInterceptor";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function App() {
 
