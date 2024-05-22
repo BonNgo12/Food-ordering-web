@@ -30,7 +30,7 @@ export default function Thumbnails({ foods }) {
                         </div>
 
                         <div className={classes.price}>
-                            <Price price={food.price} />
+                            <Price price={food.price.toString()} />
                         </div>
                     </div>
                 </Link>

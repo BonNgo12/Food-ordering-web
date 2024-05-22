@@ -1,8 +1,8 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 export const FoodSchema = new Schema(
   {
     name: { type: String, required: true },
-    price: { type: Number, required: true },
+    price: { type: Types.Decimal128, required: true },
     tags: { type: [String] },
     favorite: { type: Boolean, default: false },
     stars: { type: Number, require: true },
@@ -13,6 +13,11 @@ export const FoodSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      transform: (doc, ret) => {
+        // Ensure price is converted to string for JSON output
+        ret.price = ret.price ? ret.price.toString() : ret.price;
+        return ret;
+      },
     },
     toObject: {
       virtuals: true,

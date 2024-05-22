@@ -7,9 +7,7 @@ import { UserModel } from "../models/user.model.js";
 import bcrypt from 'bcryptjs';
 import auth from '../middleware/auth.mid.js';
 import admin from '../middleware/admin.mid.js';
-
 const PASSWORD_HASH_SALT_ROUNDS = 10;
-
 
 router.post(
   '/login', 

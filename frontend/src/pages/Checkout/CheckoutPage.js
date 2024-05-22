@@ -12,20 +12,22 @@ import Input from '../../Components/Input/Input';
 import Button from '../../Components/Button/Button';
 import OrderItemsList from '../../Components/OrderItemsList/OrderItemsList';
 import Map from '../../Components/Map/Map';
-import PaypalButtons from '../../Components/PaypalButtons/PaypalButtons';
 
 export default function CheckoutPage() {
   const { cart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [order, setOrder] = useState({ ...cart });
+
   const [paymentMethod, setPaymentMethod] = useState('');
   const { clearCart } = useCart();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const submit = async data => {
     if (!order.addressLatLng) {
       toast.warning('Please select your location on the map');
@@ -39,11 +41,12 @@ export default function CheckoutPage() {
     }
     else if (paymentMethod === 'paypal') {
       await createOrder({ ...order, name: data.name, address: data.address, paymentMethod: 'PAYPAL' });
-      // navigate('/payment');
+      navigate('/payment');
     }
-    //  else {
-    //   toast.warning('Please select a payment method');
-    // }
+
+    else {
+      toast.warning('Please select a payment method');
+    }
     // await createOrder({ ...order, name: data.name, address: data.address });
     // navigate('/payment');
   };
@@ -108,17 +111,12 @@ export default function CheckoutPage() {
 
         <div className={classes.buttons_container}>
           <div className={classes.buttons}>
-            {paymentMethod === 'cash' && (
-              <Button
-                type="submit"
-                text="Place Order"
-                width="100%"
-                height="3rem"
-              />
-            )}
-            {paymentMethod === 'paypal' && (
-              <PaypalButtons order={order} />
-            )}
+            <Button
+              type="submit"
+              text={paymentMethod === 'cash' ? 'Place Order' : 'Go To Payment'}
+              width="100%"
+              height="3rem"
+            />
           </div>
         </div>
       </form>
