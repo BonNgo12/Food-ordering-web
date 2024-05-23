@@ -14,7 +14,6 @@ export const FoodSchema = new Schema(
     toJSON: {
       virtuals: true,
       transform: (doc, ret) => {
-        // Ensure price is converted to string for JSON output
         ret.price = ret.price ? ret.price.toString() : ret.price;
         return ret;
       },

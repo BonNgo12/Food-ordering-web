@@ -1,7 +1,6 @@
 import { UNAUTHORIZED } from '../constants/httpStatus.js';
 import jwt from 'jsonwebtoken';
 const { verify } = jwt;
-
 export default (req, res, next) => {
   const token = req.headers.access_token;
   if (!token) return res.status(UNAUTHORIZED).send();
@@ -12,6 +11,5 @@ export default (req, res, next) => {
   } catch (error) {
     res.status(UNAUTHORIZED).send();
   }
-
   return next();
 };

@@ -1,4 +1,4 @@
-import { connect, set} from 'mongoose';
+import { connect, set } from 'mongoose';
 import mongoose from 'mongoose';
 import { UserModel } from '../models/user.model.js';
 import { FoodModel } from '../models/food.model.js';

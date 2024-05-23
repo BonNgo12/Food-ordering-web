@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import classes from './DashboardPage.module.css';
 import { Link } from 'react-router-dom';
 
-export default function Dashboard() {
+export default function DashboardPage() {
   const { user } = useAuth();
 
   return (

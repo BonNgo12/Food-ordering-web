@@ -47,8 +47,6 @@ export default function CheckoutPage() {
     else {
       toast.warning('Please select a payment method');
     }
-    // await createOrder({ ...order, name: data.name, address: data.address });
-    // navigate('/payment');
   };
 
   return (
