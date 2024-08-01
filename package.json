@@ -5,6 +5,7 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "decimal.js": "^10.4.3",
     "react-icons": "^5.2.1",
     "react-use-websocket": "^4.8.1",
     "realm-web": "^2.0.0",

@@ -36,6 +36,30 @@ export default function HomePage() {
         
     }, [searchTerm, tag]);
 
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/0.1.0-beta.2/libs/oversea/index.js';
+        script.async = true;
+        script.onload = () => {
+            if (window.CozeWebSDK) {
+                new window.CozeWebSDK.WebChatClient({
+                    config: {
+                        bot_id: '7371775103573180432',
+                    },
+                    componentProps: {
+                        title: 'FoodAI',
+                    },
+                });
+            }
+        };
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
+
     return <>
         <Tags tags={tags}/>
         {foods.length ===0 && <NotFound linkText="Reset Search"/>}

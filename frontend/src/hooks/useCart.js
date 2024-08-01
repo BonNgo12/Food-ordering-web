@@ -15,7 +15,7 @@ export default function CartProvider({children}) {
     const [totalCount, setTotalCount]=useState(initCart.totalCount);
 
     useEffect(() => {
-        const totalPrice = sum(cartItems.map(item => item.price));
+        const totalPrice = sum(cartItems.map(item => parseFloat(item.price)));
         const totalCount = sum(cartItems.map(item => item.quantity));
         setTotalPrice(totalPrice);
         setTotalCount(totalCount);
@@ -88,5 +88,7 @@ export default function CartProvider({children}) {
     </CartContext.Provider>;
 }
 export const useCart = () => useContext(CartContext);
+
+
 
 

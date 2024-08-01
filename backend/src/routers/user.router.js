@@ -1,7 +1,7 @@
 import { Router } from "express";
 import jwt from 'jsonwebtoken';
 const router = Router();
-import { BAD_REQUEST } from "../constants/httpStatus.js";
+import { BAD_REQUEST, UNAUTHORIZED } from "../constants/httpStatus.js";
 import handler from 'express-async-handler';
 import { UserModel } from "../models/user.model.js";
 import bcrypt from 'bcryptjs';
@@ -15,11 +15,14 @@ router.post(
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
 
+    if (user.isBlocked && (await bcrypt.compare(password, user.password))) {
+      return res.status(BAD_REQUEST).send('Your account is blocked. Please contact support.');
+    }
+    
     if (user && (await bcrypt.compare(password, user.password))){
         res.send(generateTokenResponse(user));
         return;
     }
-
     res.status(BAD_REQUEST).send('Username or password is invalid');
   })
 );
@@ -125,6 +128,32 @@ router.put(
     res.send(user.isBlocked);
   })
 );
+
+// router.put(
+//   '/toggleBlock/:userId',
+//   admin,
+//   handler(async (req, res) => {
+//     const { userId } = req.params;
+
+//     if (userId === req.user.id) {
+//       return res.status(BAD_REQUEST).send("Can't block yourself!");
+//     }
+
+//     // Find the user by ID
+//     const user = await UserModel.findById(userId);
+//     if (!user) {
+//       return res.status(404).send('User not found');
+//     }
+
+//     // Toggle the block status
+//     user.isBlocked = !user.isBlocked;
+//     await user.save();
+
+//     // Send the updated block status as the response
+//     res.send({ isBlocked: user.isBlocked });
+//   })
+// );
+
 
 router.get(
   '/getById/:userId',
