@@ -29,10 +29,10 @@ export default function CheckoutPage() {
   } = useForm();
 
   const submit = async data => {
-    if (!order.addressLatLng) {
-      toast.warning('Please select your location on the map');
-      return;
-    }
+    // if (!order.addressLatLng) {
+    //   toast.warning('Please select your location on the map');
+    //   return;
+    // }
     if (paymentMethod === 'cash') {
       await createOrder({ ...order, name: data.name, address: data.address, paymentMethod: 'CASH' });
       toast.success('Place Order Successfully', 'Success');
@@ -71,7 +71,7 @@ export default function CheckoutPage() {
           <OrderItemsList order={order} />
         </div>
 
-        <div>
+        {/* <div>
           <Title title="Your Location" fontSize="1.6rem" />
           <Map
             location={order.addressLatLng}
@@ -80,7 +80,7 @@ export default function CheckoutPage() {
               setOrder({ ...order, addressLatLng: latlng });
             }}
           />
-        </div>
+        </div> */}
 
         <div className={classes.payment_method}>
           <Title title="Payment Method" fontSize="1.6rem" />
@@ -95,7 +95,7 @@ export default function CheckoutPage() {
               Cash (COD) 
             </label>
 
-            <label>
+            {/* <label>
               <input
                   type="checkbox"
                   value="paypal"
@@ -103,7 +103,7 @@ export default function CheckoutPage() {
                   onChange={e => setPaymentMethod(e.target.checked ? 'paypal' : '')}
                 />
                 Paypal Credit Card
-            </label>
+            </label> */}
           </div>
         </div>
 

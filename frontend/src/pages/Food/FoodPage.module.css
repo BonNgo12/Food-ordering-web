@@ -11,12 +11,13 @@
   max-width: 40rem;
 }
 
-.image {
+.img .image {
   border-radius: 1rem;
   flex: 1 0;
   object-fit: cover;
   height: 35rem;
   margin: 1rem;
+  border: black 1px solid;
 }
 
 .details {

@@ -10,7 +10,7 @@ set('strictQuery', true);
 
 export const dbconnect = async() => {
   try {
-    mongoose.connect("mongodb://localhost:27017/foodmine-db", {
+    mongoose.connect(process.env.MONGO_URI, {
       });
       await seedUsers();
       await seedFoods();
@@ -42,7 +42,7 @@ async function seedFoods(){
     return;
   }
   for (const food of sample_foods) {
-    food.imageUrl = `/foods/${food.imageUrl}`;
+    food.imageUrl = `foods/${food.imageUrl}`; // Corrected path
     await FoodModel.create(food);
   }
   console.log('Foods seed Is Done!');

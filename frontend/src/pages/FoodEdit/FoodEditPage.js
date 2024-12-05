@@ -70,7 +70,7 @@ export default function FoodEditPage() {
                             className={classes.image_link} 
                             target='blank'
                         >
-                            <img src={imageUrl} alt='Uploaded' />
+                            <img src={`/${imageUrl}`} alt='Uploaded' />
                         </a>
                     )}
 

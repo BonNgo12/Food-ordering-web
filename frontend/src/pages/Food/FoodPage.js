@@ -20,8 +20,13 @@ export default function FoodPage() {
   };
 
   useEffect(() => {
-    getById(id).then(setFood);
+    getById(id).then(data => {
+      console.log(data); // Log the food object
+      console.log(data.imageUrl); // Log the image URL
+      setFood(data);
+    });
   }, [id]);
+
   return (
     <>
       {!food ? (
@@ -29,9 +34,9 @@ export default function FoodPage() {
       ) : (
         <div className={classes.container}>
           <img
-            className={classes.image}
-            src={`${food.imageUrl}`}
-            alt={food.name}
+              className={classes.image}
+              src={`/${food.imageUrl}`}
+              alt={food.name} 
           />
 
           <div className={classes.details}>
