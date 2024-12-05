@@ -5,8 +5,8 @@ import Title from '../../Components/Title/Title';
 import { useCart } from '../../hooks/useCart';
 import classes from './CartPage.module.css';
 import NotFound from '../../Components/NotFound/NotFound';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faX } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../hooks/useAuth';
 import LoginPage from '../Login/LoginPage';
 
@@ -58,7 +58,7 @@ export default function CartPage() {
                         className={classes.remove_button}
                         onClick={() => removeFromCart(item.food.id)}
                       >
-                        <FontAwesomeIcon icon={faX} />
+                        {/* <FontAwesomeIcon icon={faX} /> */}
                       </button>
                     </div>
                   </li>

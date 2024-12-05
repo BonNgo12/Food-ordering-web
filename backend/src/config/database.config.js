@@ -2,7 +2,7 @@ import { connect, set } from 'mongoose';
 import mongoose from 'mongoose';
 import { UserModel } from '../models/user.model.js';
 import { FoodModel } from '../models/food.model.js';
-// import { sample_foods } from '../data.js';
+import { sample_foods } from '../data.js';
 import { sample_users } from '../data.js';
 import bcrypt from 'bcryptjs';
 const PASSWORD_HASH_SALT_ROUNDS = 10;
@@ -11,8 +11,6 @@ set('strictQuery', true);
 export const dbconnect = async() => {
   try {
     mongoose.connect("mongodb://localhost:27017/foodmine-db", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
       });
       await seedUsers();
       await seedFoods();
@@ -21,6 +19,8 @@ export const dbconnect = async() => {
       console.log(error);
     }
 };
+
+
 
 async function seedUsers() {
   const usersCount = await UserModel.countDocuments();
